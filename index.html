@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simon Anthony Sancover - Full Stack Developer</title>
+  <style>
+    :root {
+      --red-dark: #8b0000;
+      --red: #e63946;
+      --red-light: #f94144;
+      --black: #121212;
+      --gray-dark: #222;
+      --gray-light: #444;
+      --text-light: #f5f5f5;
+      --accent: var(--red);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: var(--black);
+      color: var(--text-light);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      background-color: var(--red-dark);
+      padding: 15px 20px;
+      box-shadow: 0 3px 8px rgba(230, 57, 70, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    nav a {
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover, nav a.active {
+      background-color: var(--red-light);
+      color: var(--black);
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto 60px auto;
+      padding: 0 20px;
+    }
+    section {
+      margin-bottom: 60px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--red-dark);
+    }
+    h1, h2 {
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    /* Home Section */
+    #home {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+    }
+    #home img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--accent);
+      background-color: var(--gray-dark);
+      flex-shrink: 0;
+    }
+    #home-text {
+      max-width: 500px;
+    }
+    #home h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    #home p {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--red-light);
+    }
+    /* About */
+    #about p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #ddd;
+    }
+    /* Skills */
+    #skills ul {
+      list-style: none;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 0;
+    }
+    #skills li {
+      margin-bottom: 18px;
+    }
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      color: var(--red-light);
+      margin-bottom: 6px;
+    }
+    .skill-bar {
+      background: var(--gray-dark);
+      border-radius: 12px;
+      overflow: hidden;
+      height: 22px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .skill-progress {
+      height: 100%;
+      background: var(--red);
+      border-radius: 12px 0 0 12px;
+      transition: width 1s;
+    }
+    /* Projects */
+    #projects .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .project {
+      background-color: var(--gray-dark);
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+      transition: transform 0.3s ease;
+    }
+    .project:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(230, 57, 70, 0.7);
+    }
+    .project h3 {
+      margin-bottom: 12px;
+      color: var(--red);
+    }
+    .project p {
+      font-size: 1rem;
+      color: var(--text-light);
+      min-height: 80px;
+    }
+    .project a {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--red-light);
+      font-weight: 700;
+    }
+    .project-img {
+      width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 10px rgba(230, 57, 70, 0.3);
+      display: block;
+      background: #000;
+    }
+    /* Contact */
+    #contact > p {
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      text-align: center;
+      color: var(--red-light);
+      font-weight: 700;
+    }
+    #contact .contact-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+    #contact-info {
+      flex: 1 1 320px;
+      background-color: var(--gray-dark);
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+      color: var(--red-light);
+    }
+    #contact-info h3 {
+      margin-bottom: 20px;
+      color: var(--red);
+    }
+    #contact-info p {
+      margin-bottom: 14px;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    #contact-info a {
+      color: var(--accent);
+    }
+    #contact form {
+      flex: 1 1 400px;
+      background-color: var(--gray-dark);
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+    }
+    #contact label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--red-light);
+      font-size: 1rem;
+    }
+    #contact input, #contact textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 22px;
+      border: 2px solid var(--red);
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #2a2a2a;
+      color: var(--text-light);
+      transition: border-color 0.3s ease;
+    }
+    #contact input:focus, #contact textarea:focus {
+      border-color: var(--red-light);
+      outline: none;
+    }
+    #contact button {
+      background-color: var(--red);
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    #contact button:hover {
+      background-color: var(--red-light);
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px 10px;
+      color: var(--red);
+      font-size: 0.95rem;
+      margin-top: 40px;
+      border-top: 1px solid var(--red-dark);
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+        gap: 18px;
+      }
+      #home {
+        flex-direction: column;
+        text-align: center;
+      }
+      #home img {
+        margin-bottom: 25px;
+      }
+      #contact .contact-wrapper {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Home -->
+    <section id="home">
+      <img src="SIMON.jfif" alt="Simon Anthony Sancover" />
+      <div id="home-text">
+        <h1>Hello, I'm Simon Anthony Sancover</h1>
+        <p>FULL STACK DEVELOPER</p>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I am a dedicated full stack developer based in Antipolo, Mandaue City. I specialize in building robust web applications using modern technologies, focusing on clean code, scalability, and great user experiences.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul>
+        <li>
+          <div class="skill-label">JavaScript / TypeScript <span>85%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+        </li>
+        <li>
+          <div class="skill-label">React.js / Next.js <span>80%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+        </li>
+        <li>
+          <div class="skill-label">Node.js / Express <span>75%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+        </li>
+        <li>
+          <div class="skill-label">Python / Django <span>65%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 65%;"></div></div>
+        </li>
+        <li>
+          <div class="skill-label">SQL / NoSQL Databases <span>70%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 70%;"></div></div>
+        </li>
+        <li>
+          <div class="skill-label">Cloud & DevOps (Vercel, AWS) <span>60%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 60%;"></div></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="project-list">
+        <div class="project">
+          <img class="project-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="ShopEase E-Commerce Platform Screenshot" />
+          <h3>ShopEase - E-Commerce Platform</h3>
+          <p>
+            A scalable full stack e-commerce application with React frontend, Node.js backend, and MongoDB. Features product catalog, shopping cart, payment integration, and admin dashboard.
+          </p>
+          <a href="https://github.com/simonanthonysancover/shopease" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        <div class="project">
+          <img class="project-img" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Connectify Social Network Screenshot" />
+          <h3>Connectify - Social Network</h3>
+          <p>
+            A modern social networking app built with Next.js and Firebase, featuring real-time chat, posts, likes, and user profiles. Deployed on Vercel for fast global access.
+          </p>
+          <a href="https://github.com/simonanthonysancover/connectify" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        <div class="project">
+          <img class="project-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="TaskMaster Project Management Tool Screenshot" />
+          <h3>TaskMaster - Project Management Tool</h3>
+          <p>
+            A full stack project management tool with React, Django REST API, and PostgreSQL. Includes task tracking, team collaboration, and analytics dashboard.
+          </p>
+          <a href="https://github.com/simonanthonysancover/taskmaster" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>Feel free to reach out via the form below or through my contact details.</p>
+      <div class="contact-wrapper">
+        <div id="contact-info">
+          <h3>Contact Information</h3>
+          <p><strong>Email:</strong> <a href="mailto:simonanthonysancover@gmail.com">simonanthonysancover@gmail.com</a></p>
+          <p><strong>Location:</strong> Antipolo, Mandaue City</p>
+        </div>
+        <form action="mailto:simonanthonysancover@gmail.com" method="post" enctype="text/plain">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Simon Anthony Sancover. All rights reserved.
+  </footer>
+</body>
+</html>
